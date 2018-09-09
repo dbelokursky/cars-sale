@@ -134,4 +134,9 @@ public class CarController {
     public String getLoginPage() {
         return "login";
     }
+
+    @GetMapping("/")
+    public String redirectFromRoot() {
+        return "redirect:/login";
+    }
 }
