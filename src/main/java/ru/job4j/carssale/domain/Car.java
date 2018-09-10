@@ -5,7 +5,9 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Dmitry Belokursky
@@ -52,7 +54,7 @@ public class Car {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "car")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List<Image> images = new ArrayList<>();
+    private Set<Image> images = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "owner_id")

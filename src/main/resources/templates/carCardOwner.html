@@ -28,7 +28,7 @@
         </form>
         <div class="panel panel-primary filterable">
             <div class="panel-heading">
-                <h3 class="panel-title">Cars sale</h3>
+                <h3 class="panel-title">Cars card</h3>
             </div>
             <table class="table">
                 <thead>
@@ -75,9 +75,8 @@
                 </tbody>
             </table>
             <div th:each="img : ${car.images}">
-                <a data-fancybox="gallery" th:href="'uploads/' + ${img.name}">
-                    <img th:src="'uploads/thumb_' + ${img.name}"/>
-                </a>
+                <a data-fancybox="gallery" th:href="'uploads/' + ${img.name}"><img
+                        th:src="'uploads/thumb_' + ${img.name}"></a>
             </div>
         </div>
     </div>

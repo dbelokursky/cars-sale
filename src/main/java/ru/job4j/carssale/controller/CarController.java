@@ -30,7 +30,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Log4j
 @Controller
@@ -96,29 +98,31 @@ public class CarController {
 
     @PostMapping("/add")
     public String addCar(@ModelAttribute Car car, @RequestParam MultipartFile[] files) {
-        List<Image> images = new ArrayList<>();
+        Set<Image> images = new HashSet<>();
         try {
             if (files != null && files.length > 0) {
                 for (MultipartFile multipartFile : files) {
-                    String imageName = String.format("%3.0f%s", Math.random() * 1000, multipartFile.getOriginalFilename());
-                    String imagePath = uploadDirPath + imageName;
-                    String thumbnailPath = uploadDirPath + "thumb_" + imageName;
-                    Files.copy(multipartFile.getInputStream(), Paths.get(imagePath));
-                    BufferedImage bufferedImage = ImageIO.read(multipartFile.getInputStream());
-                    BufferedImage thumbnail = Scalr.resize(bufferedImage,
-                            Scalr.Method.QUALITY,
-                            Scalr.Mode.AUTOMATIC,
-                            100,
-                            Scalr.OP_ANTIALIAS);
+                    if (!multipartFile.isEmpty()) {
+                        String imageName = String.format("%3.0f%s", Math.random() * 1000, multipartFile.getOriginalFilename());
+                        String imagePath = uploadDirPath + imageName;
+                        String thumbnailPath = uploadDirPath + "thumb_" + imageName;
+                        Files.copy(multipartFile.getInputStream(), Paths.get(imagePath));
+                        BufferedImage bufferedImage = ImageIO.read(multipartFile.getInputStream());
+                        BufferedImage thumbnail = Scalr.resize(bufferedImage,
+                                Scalr.Method.QUALITY,
+                                Scalr.Mode.AUTOMATIC,
+                                200,
+                                Scalr.OP_ANTIALIAS);
 
-                    String fileExtension = imageName.trim().toLowerCase().substring(imageName.lastIndexOf(".") + 1);
-                    ImageIO.write(thumbnail, fileExtension, new File(thumbnailPath));
-                    Image image = new Image();
-                    image.setName(imageName);
-                    image.setPath(imagePath);
-                    image.setCar(car);
-                    images.add(image);
-                    imageService.save(image);
+                        String fileExtension = imageName.trim().toLowerCase().substring(imageName.lastIndexOf(".") + 1);
+                        ImageIO.write(thumbnail, fileExtension, new File(thumbnailPath));
+                        Image image = new Image();
+                        image.setName(imageName);
+                        image.setPath(imagePath);
+                        image.setCar(car);
+                        images.add(image);
+                        imageService.save(image);
+                    }
                 }
             }
             car.setImages(images);
