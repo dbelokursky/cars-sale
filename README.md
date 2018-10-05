@@ -4,10 +4,17 @@
 ## Description
 Simple CRUD application with authentication/authorization.
 Login page.
+
 ![login page](https://github.com/dbelokursky/cars-sale/blob/master/src/main/resources/static/img/loginPage.png)
+
 Add page.
-![add page](https://github.com/dbelokursky/cars-sale/tree/master/src/main/resources/static/img/carAddPage.png)
+
+![add page](https://github.com/dbelokursky/cars-sale/blob/master/src/main/resources/static/img/carAddPage.png)
+
 Filtration.
-![filtration](https://github.com/dbelokursky/cars-sale/tree/master/src/main/resources/static/img/filterPage.png)
+
+![filtration](https://github.com/dbelokursky/cars-sale/blob/master/src/main/resources/static/img/filterPage.png)
+
 Cars list page.
-![cars list](https://github.com/dbelokursky/cars-sale/tree/master/src/main/resources/static/img/carListPage.png)
+
+![cars list](https://github.com/dbelokursky/cars-sale/blob/master/src/main/resources/static/img/carListPage.png)
